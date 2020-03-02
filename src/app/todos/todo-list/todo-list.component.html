@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="card-hover-shadow-2x mb-3 card">
+            <div class="card-header-tab card-header">
+                <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+                        class="fa fa-tasks"></i>&nbsp;Task Lists</div>
+            </div>
+            <div class="scroll-area-md">
+                <!-- <perfect-scrollbar class="ps-show-limits"> -->
+                <div style="overflow-y: scroll; height:275px; width: auto;">
+                    <div style="position: static;" class="ps ps--active-y" *ngIf="todos?.length">
+                        <div class="ps-content">
+                            <ul class=" list-group list-group-flush">
+
+                                <li class="list-group-item" *ngFor="let todo of todos">
+                                    <div class="todo-indicator bg-focus"></div>
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-2">
+                                                <div class="custom-checkbox custom-control">
+                                                    <input class="custom-control-input" [id]="'checkBox' + todo.id"
+                                                        type="checkbox" [checked]="todo.status=='Done'"
+                                                        (click)="updateTodoStatus(todo.id)">
+                                                    <label class="custom-control-label"
+                                                        [for]="'checkBox' + todo.id">&nbsp;</label></div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">{{todo.task}}</div>
+                                                <div class="widget-subheading">
+                                                    <div>
+
+                                                        <div
+                                                            [class]="todo.status=='Done' ? 'badge badge-success ml-5': 'badge badge-warning ml-5' ">
+                                                            {{todo.status}}</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <!-- <button class="border-0 btn-transition btn btn-outline-success"> <i class="fa fa-check"></i></button>  -->
+
+                                                <button class="border-0 btn-transition btn btn-outline-danger"
+                                                    (click)="deleteTodo(todo.id)"> <i class="fa fa-trash"></i> </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- </perfect-scrollbar> -->
+                </div>
+            </div>
+            <!-- <div class="d-block text-right card-footer"><button class="mr-2 btn btn-link btn-sm">Cancel</button><button class="btn btn-primary">Add Task</button></div> -->
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="col-md-8">
+
+        <div class="widget-content-right">
+
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
+                (change)="showPendingItems($event.target.checked)" [checked]="showPending">
+            <label class="mr-5 btn-warning" for="exampleRadios1">
+                Show Pending
+            </label>
+
+
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"
+                (change)="showCompletedItems($event.target.checked)" [checked]="showCompleted">
+            <label class="mr-5 btn-success" for="exampleRadios2">
+                Show Completed
+            </label>
+
+
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3"
+                (change)="showAllItems($event.target.checked)" [checked]="showAll" >
+            <label class="mr-5 btn-info" for="exampleRadios3">
+                Show all
+            </label>
+
+        </div>
+
+    </div>
+</div> 
